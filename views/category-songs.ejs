@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <main>
+        <h1><%= items.category %> </h1>
+        <div class="cards-container">
+          <% if (items.length > 0) { %>
+            <% items.forEach(item => { %>
+              <div class="card">
+                <h2><%= item.title %></h2>
+                <p><strong>Artist:</strong> <%= item.artist %></p>
+                <p><strong>Price:</strong> $<%= item.price %></p>
+                <p><strong>Category:</strong> <%= item.name %></p>
+              </div>
+            <% }) %>
+          <% } %>
+        </div>      
+    </main>
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>

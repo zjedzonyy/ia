@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <main>
+        <h1>WITAM TO JA ITEMS</h1>
+        <div class="add-category">
+          <form action="/items/add" method="POST">
+              <label for="title">Song</label>
+              <input type="text" name="title" id="title" required>
+      
+              <label for="artist">Artist</label>
+              <input type="text" name="artist" id="artist" required>
+
+              <label for="price">Price $</label>
+              <input type="number" name="price" id="price" required>
+
+              <label for="category">Category</label>
+              <select name="category" id="category">
+                <option value="<%= -1 %>">Uncategorized</option>
+                <% if (categories.length > 0) { %>
+                  <% categories.forEach(category => { %>
+                    <option value="<%= category.id %>"> <%= category.name %></option>
+
+                  <% }) %>
+                <% }  %>
+              </select>
+      
+              <button type="submit">Add Song</button>
+          </form>
+      </div>
+      
+        <div class="cards-container">
+            <% if (items.length > 0) { %>
+              <% items.forEach(item => { %>
+                <div class="card">
+                  <h2><%= item.title %></h2>
+                  <p><strong>Item ID:</strong> <%= item.song_id %></p>
+                  <p><strong>Artist:</strong> <%= item.artist %></p>
+                  <p><strong>Price:</strong> $<%= item.price %></p>
+                  <p><strong>Category:</strong> <%= item.name ? item.name : "Uncategorized" %></p>
+                  <div class="buttons">
+                    <form action="/items/edit/:id" method="GET">
+                      <input type="hidden" name="itemId" value="<%= item.song_id %>">
+                      <button type="submit" class="delete-btn">
+                          Edit
+                      </button>
+                    </form>
+                    <form action="/items/delete/:id" method="POST">
+                      <input type="hidden" name="itemId" value="<%= item.song_id %>">
+                      <button type="submit" class="delete-btn">
+                          Delete
+                      </button>
+                    </form>
+                                    </div>
+                  </div>
+              <% }) %>
+            <% } %>
+          </div>
+    </main>
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>

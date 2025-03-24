@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <main>
+        <h1>TUTAJ ZMIENISZ Song</h1>
+        <div class="add-category">
+          <form action="/items/edit/:id" method="POST">
+              <input type="hidden" name="songId" value="<%= song[0].id %>">
+
+              <label for="title">Song</label>
+              <input type="text" name="title" id="title" value="<%= song[0].title %> " required>
+              <label for="artist">Artist</label>
+              <input type="text" name="artist" id="artist" value="<%= song[0].artist %>" required>
+
+              <label for="price">Price $</label>
+              <input type="number" name="price" id="price" value="<%= song[0].price %>" required>
+
+              <select name="category" id="category">
+                <option value="<%= song[0].category %>">
+                  <%= (categories.find(category => category.id === song[0].category_id) || { name: 'Uncategorized' }).name %>
+                </option>
+                <option value="<%= -1 %>">Uncategorized</option>
+                <% if (categories.length > 0) { %>
+                  <% categories.forEach(category => { %>
+                    <option value="<%= category.id %>"> <%= category.name %></option>
+
+                  <% }) %>
+                <% }  %>
+              </select>
+      
+              <button type="submit">Edit Song</button>
+          </form>
+      </div>
+        
+    
+    </main>
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>
