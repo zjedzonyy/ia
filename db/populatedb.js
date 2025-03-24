@@ -4,7 +4,6 @@ const config = JSON.parse(process.env.CONFIG);
 
 const { Client } = require("pg");
 
-
 const removeSQL = `
 DROP TABLE categories CASCADE;
 DROP TABLE songs CASCADE;

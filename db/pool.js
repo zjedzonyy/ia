@@ -1,6 +1,7 @@
-const { Pool } = require('pg');
 require('dotenv').config();
+const { Pool } = require('pg');
 
-const config = JSON.parse(process.env.CONFIG);
+// Parsowanie CONFIG
+const config = process.env.CONFIG ? JSON.parse(process.env.CONFIG) : {};
 
 module.exports = new Pool(config);
